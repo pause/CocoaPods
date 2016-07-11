@@ -43,7 +43,7 @@ module Pod
           target_search_paths = target.build_headers.search_paths(target.platform)
           sandbox_search_paths = target.sandbox.public_headers.search_paths(target.platform)
           search_paths = target_search_paths.concat(sandbox_search_paths).uniq
-          prefix = ENV['COCOAPODS_PACKAGER_BUNDLE_IDENTIFIER_PREFIX']
+          prefix = ENV['COCOAPODS_PACKAGER_BUNDLE_IDENTIFIER_PREFIX'] || 'org.cocoapods'
 
           config = {
             'FRAMEWORK_SEARCH_PATHS' => '$(inherited) ',
