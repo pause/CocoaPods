@@ -43,6 +43,7 @@ module Pod
           target_search_paths = target.build_headers.search_paths(target.platform)
           sandbox_search_paths = target.sandbox.public_headers.search_paths(target.platform)
           search_paths = target_search_paths.concat(sandbox_search_paths).uniq
+          prefix = ENV['COCOAPODS_PACKAGER_BUNDLE_IDENTIFIER_PREFIX']
 
           config = {
             'FRAMEWORK_SEARCH_PATHS' => '$(inherited) ',
@@ -51,7 +52,7 @@ module Pod
             'LIBRARY_SEARCH_PATHS' => '$(inherited) ',
             'OTHER_LDFLAGS' => XCConfigHelper.default_ld_flags(target),
             'PODS_ROOT' => '${SRCROOT}',
-            'PRODUCT_BUNDLE_IDENTIFIER' => 'org.cocoapods.${PRODUCT_NAME:rfc1034identifier}',
+            'PRODUCT_BUNDLE_IDENTIFIER' => "#{prefix}.${PRODUCT_NAME:rfc1034identifier}",
             'SKIP_INSTALL' => 'YES',
             # 'USE_HEADERMAP' => 'NO'
           }
